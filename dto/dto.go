@@ -8,6 +8,12 @@ type ArticleContent struct {
 	Link    string
 }
 
+type TaggerArticleList struct {
+	Tag string
+	// Data []ArticleContent
+	Data interface{}
+}
+
 type SearchRequest struct {
 	Date     string
 	Query    string
@@ -16,5 +22,6 @@ type SearchRequest struct {
 
 type ResponceDto struct {
 	Request SearchRequest
-	Data    []ArticleContent
+	// Data    TaggerArticleList
+	Data []TaggerArticleList
 }

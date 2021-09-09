@@ -10,6 +10,13 @@
 PORT=3000 go run main.go
 ```
 
+## Usage
+
+```bash
+curl -s http://me:3000/ping
+curl -s http://me:3000/q/فروش/nonce/۴۵۳۲۶۴۴
+```
+
 ## Search types
 
 * برند محصول را چگونه توسعه دهیم

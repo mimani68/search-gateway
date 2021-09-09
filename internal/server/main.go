@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
@@ -18,21 +19,15 @@ func InitServer() *gin.Engine {
 
 	r.GET("/q/:searching_keyword/nonce/:nonce_value", func(c *gin.Context) {
 		//
-		// Search orginal
+		// Convert single keyword to multiple queries
 		//
-		result := sdk.Search(c.Params.ByName("searching_keyword"))
-		//
-		// TODO: custom search
-		//
-		// marketCanvasA1Question := sdk.Search(c.Params.ByName("searching_keyword"))
-		// marketCanvasA2Question := sdk.Search(c.Params.ByName("searching_keyword"))
-		// marketCanvasA3Question := sdk.Search(c.Params.ByName("searching_keyword"))
-		// marketCanvasB1Question := sdk.Search(c.Params.ByName("searching_keyword"))
-		// marketCanvasB2Question := sdk.Search(c.Params.ByName("searching_keyword"))
-		// marketCanvasB4Question := sdk.Search(c.Params.ByName("searching_keyword"))
-		// marketCanvasC1Question := sdk.Search(c.Params.ByName("searching_keyword"))
-		// marketCanvasC2Question := sdk.Search(c.Params.ByName("searching_keyword"))
+		var result []dto.TaggerArticleList
+		key := c.Params.ByName("searching_keyword")
+		q1 := sdk.Search(fmt.Sprintf("قیمت %s", key), "فروش")
+		q2 := sdk.Search(fmt.Sprintf("بازار %s", key), "فروش")
+		q3 := sdk.Search(fmt.Sprintf("سهم بازار %s", key), "فروش")
 
+		result = append(result, q1, q2, q3)
 		c.JSON(http.StatusOK, dto.ResponceDto{
 			Request: dto.SearchRequest{
 				Date:     time.Now().String(),
