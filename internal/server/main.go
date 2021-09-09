@@ -37,5 +37,14 @@ func InitServer() *gin.Engine {
 		})
 	})
 
+	r.GET("/dev/:param", func(c *gin.Context) {
+		a := map[string]interface{}{
+			"Date":     time.Now().String(),
+			"Paramter": c.Params.ByName("param"),
+			"Query":    c.Query("q"),
+		}
+		c.JSON(http.StatusOK, a)
+	})
+
 	return r
 }
