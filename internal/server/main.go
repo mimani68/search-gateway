@@ -1,4 +1,4 @@
-package router
+package server
 
 import (
 	"net/http"
@@ -9,7 +9,7 @@ import (
 	"market.ir/pkg/sdk"
 )
 
-func SetupRouter() *gin.Engine {
+func InitServer() *gin.Engine {
 	r := gin.Default()
 
 	r.GET("/ping", func(c *gin.Context) {

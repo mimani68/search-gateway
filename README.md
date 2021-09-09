@@ -1,5 +1,8 @@
 # Search gateway
 
+## Specifications
+
+* Gin framework
 
 ## Development
 

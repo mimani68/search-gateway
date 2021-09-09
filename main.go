@@ -5,11 +5,11 @@ import (
 	"os"
 	"strconv"
 
-	"market.ir/internal/router"
+	"market.ir/internal/server"
 )
 
 func main() {
-	r := router.SetupRouter()
+	r := server.InitServer()
 	var PORT int
 	portEnvValue, err := strconv.Atoi(os.Getenv("PORT"))
 	PORT = portEnvValue
