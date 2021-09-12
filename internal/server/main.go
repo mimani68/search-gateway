@@ -9,7 +9,6 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"market.ir/internal/dto"
-	"market.ir/pkg/logHandler"
 	"market.ir/pkg/sdk"
 )
 
@@ -38,12 +37,11 @@ func InitServer() *gin.Engine {
 		//
 		var result []dto.TaggerArticleList
 		key := c.Params.ByName("searching_keyword")
-		logHandler.Log(fmt.Sprintf("قیمت %s", key))
 		q1 := sdk.Search(fmt.Sprintf("قیمت %s", key), "zoomit", "فروش")
-		q2 := sdk.Search(fmt.Sprintf("بازار %s", key), "iran", "سهم بازار")
-		q3 := sdk.Search(fmt.Sprintf("سهم بازار %s", key), "donya-e-eqtesad", "سهم بازار")
+		// q2 := sdk.Search(fmt.Sprintf("بازار %s", key), "iran", "سهم بازار")
+		// q3 := sdk.Search(fmt.Sprintf("سهم بازار %s", key), "donya-e-eqtesad", "سهم بازار")
 
-		result = append(result, q1, q2, q3)
+		result = append(result, q1)
 		c.JSON(http.StatusOK, dto.ResponceDto{
 			Request: dto.SearchRequest{
 				Date:     time.Now().String(),
