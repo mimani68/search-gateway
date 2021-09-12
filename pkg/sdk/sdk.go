@@ -7,28 +7,30 @@ import (
 
 	"github.com/imroc/req"
 	"golang.org/x/net/html/charset"
-	"market.ir/dto"
+	"market.ir/config"
+	"market.ir/internal/dto"
+	"market.ir/pkg/logHandler"
 )
 
-func Search(keyword string, tag string) dto.TaggerArticleList {
+func Search(keyword string, where string, tag string) dto.TaggerArticleList {
 	var result interface{}
 	header := req.Header{
-		"Accept":        "application/json",
-		"Authorization": "Basic YWRtaW46YWRtaW4=",
+		"Accept": "application/json",
+		// "Authorization": "Basic YWRtaW46YWRtaW4=",
 	}
 	param := req.Param{}
-	query := convrtToUTF8(keyword, "ascii")
-	url := "http://scraper:3000/?q=" + query + "&source=zoomit&itemNumber=20"
+	query := keyword
+	resultNumber := config.GetConfig("resultNumber")
+	url := config.GetConfig("SCRAPER") + "/?q=" + query + "&source=" + where + "&itemNumber=" + resultNumber
+	logHandler.Log(url)
 	r, err := req.Get(url, header, param)
 	if err != nil {
 		log.Fatal(err)
 	}
-	r.ToJSON(&result) // response => struct/map
+	r.ToJSON(&result)
 	//
 	// DEBUG
 	//
-	// log.Printf("%+v", r) // print info (try it, you may surprise)
-
 	return dto.TaggerArticleList{
 		Tag:  tag,
 		Data: result,

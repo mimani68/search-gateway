@@ -5,13 +5,28 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"market.ir/dto"
+
+	"market.ir/internal/dto"
+	"market.ir/pkg/logHandler"
 	"market.ir/pkg/sdk"
 )
 
 func InitServer() *gin.Engine {
 	r := gin.Default()
+
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{"*"},
+		AllowHeaders:     []string{"Origin"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		// AllowOriginFunc: func(origin string) bool {
+		// 	return origin == "https://github.com"
+		// },
+		MaxAge: 12 * time.Hour,
+	}))
 
 	r.GET("/ping", func(c *gin.Context) {
 		c.String(http.StatusOK, "pong")
@@ -23,9 +38,10 @@ func InitServer() *gin.Engine {
 		//
 		var result []dto.TaggerArticleList
 		key := c.Params.ByName("searching_keyword")
-		q1 := sdk.Search(fmt.Sprintf("قیمت %s", key), "فروش")
-		q2 := sdk.Search(fmt.Sprintf("بازار %s", key), "فروش")
-		q3 := sdk.Search(fmt.Sprintf("سهم بازار %s", key), "فروش")
+		logHandler.Log(fmt.Sprintf("قیمت %s", key))
+		q1 := sdk.Search(fmt.Sprintf("قیمت %s", key), "zoomit", "فروش")
+		q2 := sdk.Search(fmt.Sprintf("بازار %s", key), "iran", "سهم بازار")
+		q3 := sdk.Search(fmt.Sprintf("سهم بازار %s", key), "donya-e-eqtesad", "سهم بازار")
 
 		result = append(result, q1, q2, q3)
 		c.JSON(http.StatusOK, dto.ResponceDto{
