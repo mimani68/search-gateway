@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"io/ioutil"
 	"log"
+	"net/url"
 
 	"github.com/imroc/req"
 	"golang.org/x/net/html/charset"
@@ -21,7 +22,7 @@ func Search(keyword string, where string, tag string) dto.TaggerArticleList {
 	param := req.Param{}
 	query := keyword
 	resultNumber := config.GetConfig("resultNumber")
-	url := config.GetConfig("SCRAPER") + "/?q=" + query + "&source=" + where + "&itemNumber=" + resultNumber
+	url := config.GetConfig("SCRAPER") + "/?q=" + url.QueryEscape(query) + "&source=" + where + "&itemNumber=" + resultNumber
 	logHandler.Log(url)
 	r, err := req.Get(url, header, param)
 	if err != nil {
