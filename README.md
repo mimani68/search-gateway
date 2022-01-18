@@ -14,7 +14,7 @@ PORT=3000 go run main.go
 
 ```bash
 curl -s http://me:3000/ping
-curl -s http://me:3000/q/فروش/nonce/۴۵۳۲۶۴۴
+curl -s http://me:3000/q/فروش
 ```
 
 ## Search types
