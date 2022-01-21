@@ -17,14 +17,14 @@ type SearchRequest struct {
 }
 
 type ResponseDto struct {
-	Meta                  SearchRequest `json:"meta"`
-	KeyPartners           []Item        `json:"keyPartners"`
-	KeyActivities         []Item        `json:"keyActivities"`
-	KeyResources          []Item        `json:"keyResources"`
-	ValuePropositions     []Item        `json:"valuePropositions"`
-	CustomerRelationships []Item        `json:"customerRelationships"`
-	Channels              []Item        `json:"channels"`
-	CustomerSegments      []Item        `json:"customerSegments"`
-	CostStructure         []Item        `json:"costStructure"`
-	RevenueStreams        []Item        `json:"revenueStreams"`
+	Meta                  SearchRequest `json:"meta,omitempty"`
+	KeyPartners           []Item        `json:"keyPartners,omitempty"`
+	KeyActivities         []Item        `json:"keyActivities,omitempty"`
+	KeyResources          []Item        `json:"keyResources,omitempty"`
+	ValuePropositions     []Item        `json:"valuePropositions,omitempty"`
+	CustomerRelationships []Item        `json:"customerRelationships,omitempty"`
+	Channels              []Item        `json:"channel,omitempty"`
+	CustomerSegments      []Item        `json:"customerSegments,omitempty"`
+	CostStructure         []Item        `json:"costStructure,omitempty"`
+	RevenueStreams        []Item        `json:"revenueStreams,omitempty"`
 }

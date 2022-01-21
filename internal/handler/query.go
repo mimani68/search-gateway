@@ -16,27 +16,33 @@ func QueryHandler(c *gin.Context) {
 	//
 	// q1 := sdk.Search(fmt.Sprintf("قیمت %s", key), "zoomit", "فروش")
 
-	err, result := service.ShowSingleQuery()
-	if err {
+	var result dto.ResponseDto
+	success, keyPartnersItem := service.ShowSingleQuery()
+	if !success {
 		c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"Error": "true",
 		})
+		return
 	}
+	result.KeyPartners = append(result.KeyPartners, keyPartnersItem)
+	result.Meta.Paramter = key
 
-	c.JSON(http.StatusOK, dto.ResponseDto{
-		Meta: dto.SearchRequest{
-			Paramter: key,
-		},
-		KeyPartners: []dto.Item{
-			result,
-		},
-		KeyActivities:         []dto.Item{},
-		KeyResources:          []dto.Item{},
-		ValuePropositions:     []dto.Item{},
-		CustomerRelationships: []dto.Item{},
-		Channels:              []dto.Item{},
-		CustomerSegments:      []dto.Item{},
-		CostStructure:         []dto.Item{},
-		RevenueStreams:        []dto.Item{},
-	})
+	c.JSON(http.StatusOK, result)
+
+	// c.JSON(http.StatusOK, dto.ResponseDto{
+	// 	Meta: dto.SearchRequest{
+	// 		Paramter: key,
+	// 	},
+	// 	KeyPartners: []dto.Item{
+	// 		result,
+	// 	},
+	// 	KeyActivities:         []dto.Item{},
+	// 	KeyResources:          []dto.Item{},
+	// 	ValuePropositions:     []dto.Item{},
+	// 	CustomerRelationships: []dto.Item{},
+	// 	Channels:              []dto.Item{},
+	// 	CustomerSegments:      []dto.Item{},
+	// 	CostStructure:         []dto.Item{},
+	// 	RevenueStreams:        []dto.Item{},
+	// })
 }

@@ -3,7 +3,7 @@ package service
 import "market.ir/internal/dto"
 
 func ShowSingleQuery() (bool, dto.Item) {
-	return false, dto.Item{
+	return true, dto.Item{
 		Id:           "3753",
 		Order:        1,
 		PreText:      "متن در این قسمت به پیاان می شدر",
