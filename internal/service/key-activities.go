@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"market.ir/internal/dto"
-	textminipulator "market.ir/pkg/text-minipulator"
+	. "market.ir/pkg/text-minipulator"
 )
 
 func FindKeyActivities(query string) (bool, []dto.Item) {
@@ -15,7 +15,12 @@ func FindKeyActivities(query string) (bool, []dto.Item) {
 	 
 	استاندار آذربایجان‌شرقی از آماده بودن زیرساخت‌ها در مراکز صنعتی چون شهرک سرمایه‌گذاری خارجی، منطقه ویژه اقتصادی سهلان، شهرک بعثت و نیز منطقه آزاد ارس برای سرمایه‌گذاری خبر داد و آمادگی مسوولان دولتی و بخش خصوصی آذربایجان‌شرقی برای تسهیل حضور سرمایه‌گذاران ترک را در استان اعلام کرد.`
 
-	a := textminipulator.ShowText(text, query)
+	//
+	// sql query
+	//
+	// db.Db.Query()
+
+	a := ShowText(text, query)
 
 	if a["success"] != "true" {
 		return false, []dto.Item{}

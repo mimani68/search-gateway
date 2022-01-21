@@ -37,11 +37,8 @@ func ShowText(text string, query string) map[string]interface{} {
 
 	result["pre"] = text[:result["selectItemIndex"].(int)]
 	postStartingIndex := result["selectItemIndex"].(int) + len(fmt.Sprintf("%s", result["selectItem"]))
-	result["post"] = text[postStartingIndex:postStartingIndex+5] + "..."
+	// result["post"] = text[postStartingIndex:postStartingIndex+5] + "..."
+	result["post"] = text[postStartingIndex:] + "..."
 	result["complete"] = text
-	// fmt.Printf("[pre] %s \n\n", result["pre"])
-	// fmt.Printf("[selectItem] %s \n\n", result["selectItem"])
-	// fmt.Printf("[post] %s \n\n", result["post"])
-	// fmt.Printf("[text] %s \n\n", text)
 	return result
 }
