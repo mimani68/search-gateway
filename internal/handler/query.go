@@ -17,14 +17,24 @@ func QueryHandler(c *gin.Context) {
 	// q1 := sdk.Search(fmt.Sprintf("قیمت %s", key), "zoomit", "فروش")
 
 	var result dto.ResponseDto
-	success, keyPartnersItem := service.ShowSingleQuery()
-	if !success {
+
+	findKeyPartnersSuccess, keyPartnersItems := service.FindKeyPartnets()
+	if !findKeyPartnersSuccess {
 		c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"Error": "true",
 		})
 		return
 	}
-	result.KeyPartners = append(result.KeyPartners, keyPartnersItem)
+	findKeyActivitiesSuccess, keyActivitiesItems := service.FindKeyActivities(key)
+	if !findKeyActivitiesSuccess {
+		c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"Error": "true",
+		})
+		return
+	}
+	result.KeyPartners = keyPartnersItems
+	result.KeyActivities = keyActivitiesItems
+
 	result.Meta.Paramter = key
 
 	c.JSON(http.StatusOK, result)
