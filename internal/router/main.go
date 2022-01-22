@@ -1,4 +1,4 @@
-package server
+package router
 
 import (
 	"time"
@@ -7,12 +7,11 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"market.ir/config"
-	"market.ir/internal/db"
 	"market.ir/internal/handler"
 )
 
-func InitServer() *gin.Engine {
-	go config.GetConfig()
+func RegisterRouter() *gin.Engine {
+	config.GetConfig()
 	r := gin.Default()
 
 	r.Use(cors.New(cors.Config{
@@ -26,8 +25,6 @@ func InitServer() *gin.Engine {
 
 	r.GET("/ping", handler.Ping)
 	r.GET("/q/:searching_keyword", handler.QueryHandler)
-
-	go db.Client()
 
 	return r
 }

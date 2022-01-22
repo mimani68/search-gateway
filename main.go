@@ -6,7 +6,8 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"market.ir/internal/server"
+	"market.ir/internal/db"
+	"market.ir/internal/router"
 )
 
 func main() {
@@ -19,6 +20,10 @@ func main() {
 		PORT = "8080"
 	}
 
-	r := server.InitServer()
-	r.Run(fmt.Sprintf(":%s", PORT))
+	db.New()
+
+	r := router.RegisterRouter()
+	// r.Run(fmt.Sprintf(":%s", PORT))
+	log.Fatal(r.Run(fmt.Sprintf(":%s", PORT)))
+
 }
