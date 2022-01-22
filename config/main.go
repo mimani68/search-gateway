@@ -4,7 +4,7 @@ import "os"
 
 var Config map[string]interface{}
 
-func GetConfig(configKey string) {
+func GetConfig() {
 	Config = map[string]interface{}{
 		"port":         os.Getenv("PORT"),
 		"SCRAPER":      "http://scraper:3000",

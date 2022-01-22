@@ -6,7 +6,6 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"market.ir/internal/db"
 	"market.ir/internal/server"
 )
 
@@ -21,7 +20,5 @@ func main() {
 	}
 
 	r := server.InitServer()
-	db.Client()
-	r.Run(fmt.Sprintf("0.0.0.0:%s", PORT))
-
+	r.Run(fmt.Sprintf(":%s", PORT))
 }
