@@ -18,7 +18,9 @@ func FindKeyActivities(query string) (bool, []dto.Item) {
 	//
 	// sql query
 	//
-	// db.Db.Query()
+	// db.Db.Query(fmt.Sprintf("SELECT id, title, body FROM content.article WHERE source LIKE '%%s%';", query))
+	q := fmt.Sprintf("SELECT id, title, body FROM content.article WHERE source LIKE '\\%%s%';", query)
+	fmt.Println(q)
 
 	a := ShowText(text, query)
 

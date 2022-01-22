@@ -6,13 +6,14 @@ import (
 	"log"
 
 	"github.com/ClickHouse/clickhouse-go"
+	"market.ir/config"
 )
 
 var Db *sql.DB
 
 func Client() {
 	var err error
-	Db, err = sql.Open("clickhouse", "tcp://db:9000?debug=true")
+	Db, err = sql.Open("clickhouse", "tcp://"+config.Config["db_address"].(string)+":"+"9000?debug=true")
 	if err != nil {
 		log.Fatal(err)
 	}
