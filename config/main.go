@@ -6,6 +6,7 @@ var Config map[string]interface{}
 
 func GetConfig(configKey string) {
 	Config = map[string]interface{}{
+		"port":         os.Getenv("PORT"),
 		"SCRAPER":      "http://scraper:3000",
 		"resultNumber": "50",
 		"db_address":   os.Getenv("DB_ADDRESS"),

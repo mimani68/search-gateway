@@ -3,12 +3,12 @@ package service
 import (
 	"fmt"
 
+	"market.ir/internal/db"
 	"market.ir/internal/dto"
 	. "market.ir/pkg/text-minipulator"
 )
 
 func FindKeyActivities(query string) (bool, []dto.Item) {
-	fmt.Println(query)
 	var text = `استاندار آذربایجان‌شرقی به جلسه خود با سفیر ایران در آنکارا اشاره کرد و گفت: هرگونه مانع در مسیر توسعه روابط با ترکیه از میان برداشته خواهد شد؛ البته موانع موجود بسیار کم و قابل حل هستند.
  
 	وی از سرکنسول ترکیه در تبریز خواست، تسهیل تردد اتباع ایرانی، تجار و سرمایه‌گذاران از مرز بازرگان را پیگیری کند.
@@ -18,9 +18,9 @@ func FindKeyActivities(query string) (bool, []dto.Item) {
 	//
 	// sql query
 	//
-	// db.Db.Query(fmt.Sprintf("SELECT id, title, body FROM content.article WHERE source LIKE '%%s%';", query))
-	q := fmt.Sprintf("SELECT id, title, body FROM content.article WHERE source LIKE '\\%%s%';", query)
-	fmt.Println(q)
+	q := "SELECT id, title, body FROM content.article WHERE source LIKE '%" + query + "%';"
+	raws := db.Db.Exec(q)
+	fmt.Println(raws)
 
 	a := ShowText(text, query)
 
