@@ -26,5 +26,7 @@ func RegisterRouter() *gin.Engine {
 	r.GET("/ping", handler.Ping)
 	r.GET("/q/:searching_keyword", handler.QueryHandler)
 
+	r.POST("/feedback", handler.FeedBackHandler)
+
 	return r
 }

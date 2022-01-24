@@ -12,9 +12,8 @@ func QueryHandler(c *gin.Context) {
 	key := c.Params.ByName("searching_keyword")
 
 	//
-	// Call for automatic traning
+	// FIXME: Store search request in database
 	//
-	// q1 := sdk.Search(fmt.Sprintf("قیمت %s", key), "zoomit", "فروش")
 
 	var result dto.ResponseDto
 

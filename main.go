@@ -7,6 +7,7 @@ import (
 
 	"github.com/joho/godotenv"
 	"market.ir/internal/db"
+	"market.ir/internal/job"
 	"market.ir/internal/router"
 )
 
@@ -21,9 +22,9 @@ func main() {
 	}
 
 	db.New()
+	job.StartCronJobs()
 
 	r := router.RegisterRouter()
-	// r.Run(fmt.Sprintf(":%s", PORT))
 	log.Fatal(r.Run(fmt.Sprintf(":%s", PORT)))
 
 }
