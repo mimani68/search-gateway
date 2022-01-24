@@ -22,6 +22,10 @@ func main() {
 	}
 
 	db.New()
+
+	//
+	// Traning
+	//
 	job.StartCronJobs()
 
 	r := router.RegisterRouter()
