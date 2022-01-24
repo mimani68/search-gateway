@@ -14,7 +14,6 @@ var Db *gorm.DB
 func New() {
 	var err error
 	dsn := "tcp://" + os.Getenv("DB_ADDRESS") + ":" + os.Getenv("DB_PORT") + "?debug=true&database=" + os.Getenv("DB_NAME")
-	// url := "tcp://" + config.Config["db_address"].(string) + ":9000?debug=true"
 	Db, err = gorm.Open(clickhouse.Open(dsn), &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
 			SingularTable: true,

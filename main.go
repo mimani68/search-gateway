@@ -11,9 +11,9 @@ import (
 )
 
 func main() {
-	err := godotenv.Load()
+	err := godotenv.Load(".development.env")
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Fatal("Error loading \".development.env\" file")
 	}
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
