@@ -1,16 +1,32 @@
 package service
 
-import "market.ir/internal/dto"
+import (
+	"market.ir/internal/db"
+	"market.ir/internal/dto"
+	. "market.ir/pkg/text-minipulator"
+)
 
-func FindKeyPartnets() (bool, []dto.Item) {
+func FindKeyPartnets(query string) (bool, []dto.Item) {
+	art := &dto.Article{}
+	result := db.Db.Find(&art)
+	if result.Error != nil {
+		panic("Error in retrive data")
+	}
+
+	a := ShowText(art.Body, query)
+
+	if a["success"] != "true" {
+		return false, []dto.Item{}
+	}
+
 	return true, []dto.Item{
 		{
 			Id:           "3753",
 			Order:        1,
-			PreText:      "متن در این قسمت به پیاان می شدر",
-			PostText:     "در ادامه می توان به این اشاره کرد که ...",
-			BoldText:     "میزان واردات سالیانه مناسب نیست",
-			CompleteText: "sfsdf",
+			PreText:      a["pre"].(string),
+			PostText:     a["post"].(string),
+			BoldText:     a["selectItem"].(string),
+			CompleteText: a["complete"].(string),
 			Link:         "https://isna.ir/9849569",
 		},
 	}

@@ -6,10 +6,11 @@ import (
 	"github.com/gin-gonic/gin"
 	"market.ir/internal/dto"
 	"market.ir/internal/service"
+	"market.ir/pkg/logHandler"
 )
 
 func QueryHandler(c *gin.Context) {
-	key := c.Params.ByName("searching_keyword")
+	query := c.Params.ByName("searching_keyword")
 
 	//
 	// FIXME: Store search request in database
@@ -17,41 +18,56 @@ func QueryHandler(c *gin.Context) {
 
 	var result dto.ResponseDto
 
-	findKeyPartnersSuccess, keyPartnersItems := service.FindKeyPartnets()
+	findKeyPartnersSuccess, keyPartnersItems := service.FindKeyPartnets(query)
 	if !findKeyPartnersSuccess {
-		c.JSON(http.StatusBadRequest, map[string]interface{}{
-			"Error": "true",
-		})
-		return
-	}
-	findKeyActivitiesSuccess, keyActivitiesItems := service.FindKeyActivities(key)
-	if !findKeyActivitiesSuccess {
-		c.JSON(http.StatusBadRequest, map[string]interface{}{
-			"Error": "true",
-		})
-		return
+		logHandler.Log("Key Partners list for query: \"" + query + "\" was not exists.")
 	}
 	result.KeyPartners = keyPartnersItems
+
+	findKeyActivitiesSuccess, keyActivitiesItems := service.FindKeyActivities(query)
+	if !findKeyActivitiesSuccess {
+		logHandler.Log("Key Activities list for query: \"" + query + "\" was not exists.")
+	}
 	result.KeyActivities = keyActivitiesItems
 
-	result.Meta.Paramter = key
+	findValuePropositionsSuccess, ValuePropositionsItems := service.FindValuePropositions(query)
+	if !findValuePropositionsSuccess {
+		logHandler.Log("Value Propositions list for query: \"" + query + "\" was not exists.")
+	}
+	result.ValuePropositions = ValuePropositionsItems
+
+	findCustomerRelationshipsSuccess, CustomerRelationshipsItems := service.FindCustomerRelationships(query)
+	if !findCustomerRelationshipsSuccess {
+		logHandler.Log("Customer Relationships list for query: \"" + query + "\" was not exists.")
+	}
+	result.CustomerRelationships = CustomerRelationshipsItems
+
+	findChannelsSuccess, ChannelsItems := service.FindChannels(query)
+	if !findChannelsSuccess {
+		logHandler.Log("Channel list for query: \"" + query + "\" was not exists.")
+	}
+	result.Channels = ChannelsItems
+
+	findCustomerSegmentsSuccess, CustomerSegmentsItems := service.FindCustomerSegments(query)
+	if !findCustomerSegmentsSuccess {
+		logHandler.Log("Customer Segments list for query: \"" + query + "\" was not exists.")
+	}
+	result.CustomerSegments = CustomerSegmentsItems
+
+	findCostStructureSuccess, CostStructureItems := service.FindCostStructures(query)
+	if !findCostStructureSuccess {
+		logHandler.Log("Cost Structure list for query: \"" + query + "\" was not exists.")
+	}
+	result.CostStructure = CostStructureItems
+
+	findRevenueStreamsSuccess, RevenueStreamsItems := service.FindRevenueStreams(query)
+	if !findRevenueStreamsSuccess {
+		logHandler.Log("Revenue Streams list for query: \"" + query + "\" was not exists.")
+	}
+	result.RevenueStreams = RevenueStreamsItems
+
+	result.Meta.Paramter = query
 
 	c.JSON(http.StatusOK, result)
 
-	// c.JSON(http.StatusOK, dto.ResponseDto{
-	// 	Meta: dto.SearchRequest{
-	// 		Paramter: key,
-	// 	},
-	// 	KeyPartners: []dto.Item{
-	// 		result,
-	// 	},
-	// 	KeyActivities:         []dto.Item{},
-	// 	KeyResources:          []dto.Item{},
-	// 	ValuePropositions:     []dto.Item{},
-	// 	CustomerRelationships: []dto.Item{},
-	// 	Channels:              []dto.Item{},
-	// 	CustomerSegments:      []dto.Item{},
-	// 	CostStructure:         []dto.Item{},
-	// 	RevenueStreams:        []dto.Item{},
-	// })
 }
