@@ -24,7 +24,7 @@ func main() {
 	db.New()
 
 	//
-	// Traning
+	// Training
 	//
 	job.StartCronJobs()
 

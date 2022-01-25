@@ -24,24 +24,4 @@ func New() {
 	} else {
 		logHandler.Log("Database connected successfully.")
 	}
-	// art := &dto.Article{}
-	// result := Db.Find(&art)
-	// // result := db.Where("language = ?", "fa").First(&dto.Article{})
-	// // raws := db.First(&dto.Article, "language = ?", "fa")
-	// // raws := db.Find(dto.Article{}, "body LIKE '%ترک%'")
-	// // raws := db.Exec(`select * from content.article`)
-	// if result.Error != nil {
-	// 	panic("Error in retrive data")
-	// }
-	// fmt.Printf("[>>] %s", art)
-	// fmt.Printf("[>>] %s", result)
-	// if err := Db.Ping(); err != nil {
-	// 	if exception, ok := err.(*clickhouse.Exception); ok {
-	// 		fmt.Printf("[%d] %s \n%s\n", exception.Code, exception.Message, exception.StackTrace)
-	// 	} else {
-	// 		fmt.Println(err)
-	// 	}
-	// 	return
-	// }
-	// return Db
 }
