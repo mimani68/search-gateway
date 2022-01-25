@@ -1,4 +1,4 @@
-# Search gateway
+# Search Gateway
 
 ## Specifications
 
