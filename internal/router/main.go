@@ -6,12 +6,10 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 
-	"market.ir/config"
 	"market.ir/internal/handler"
 )
 
 func RegisterRouter() *gin.Engine {
-	config.GetConfig()
 	r := gin.Default()
 
 	r.Use(cors.New(cors.Config{

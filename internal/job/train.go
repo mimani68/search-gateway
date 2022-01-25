@@ -1,37 +1,36 @@
 package job
 
 import (
-	"fmt"
+	"time"
 
-	"github.com/robfig/cron/v3"
-	"market.ir/pkg/sdk"
+	"market.ir/pkg/scraping"
 )
 
-func StartCronJobs() {
-
-	c := cron.New()
-	// Every hour on the half hour
-	c.AddFunc("0 30 * * * *", func() {
-		trainTask()
-	})
-	// c.AddFunc("@hourly", func() { fmt.Println("Every hour") })
-	// c.AddFunc("@every 1h30m", func() { fmt.Println("Every hour thirty") })
-	c.Start()
-
-}
-
 func trainTask() {
-	keies := []string{
+	keys := []string{
 		"فروش",
 		"قیمت",
 		"سود",
+		"سهم",
+		"بازار",
+		"بازده",
+		"سرمایه گذاری",
+		"استارتاپ",
+		"نوآوری",
+		"دانش بنیان",
+		"محصول",
+		"توسعه محصول",
+		"نمونه اولیه",
+		"مشتریان",
+		"بازاریابی",
 	}
-	for _, key := range keies {
-		result := sdk.Search(fmt.Sprintf("قیمت %s", key), "zoomit", key)
-		// result := sdk.Search(fmt.Sprintf("قیمت %s", key), "zoomit", key)
-		// result := sdk.Search(fmt.Sprintf("قیمت %s", key), "zoomit", key)
-		// result := sdk.Search(fmt.Sprintf("قیمت %s", key), "zoomit", key)
-		// result := sdk.Search(fmt.Sprintf("قیمت %s", key), "zoomit", key)
-		fmt.Println(result)
+	for _, key := range keys {
+		go scraping.ScrapingHandler(key, "zoomit")
+		go scraping.ScrapingHandler(key, "donya-e-eqtesad")
+		go scraping.ScrapingHandler(key, "iribnews")
+		go scraping.ScrapingHandler(key, "irna")
+		go scraping.ScrapingHandler(key, "tabnak")
+		go scraping.ScrapingHandler(key, "fars")
+		time.Sleep(10 * time.Second)
 	}
 }
