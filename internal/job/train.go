@@ -19,10 +19,32 @@ func trainTask() {
 		"نوآوری",
 		"دانش بنیان",
 		"محصول",
+		"رقابت",
+		"کیفیت",
 		"توسعه محصول",
 		"نمونه اولیه",
 		"مشتریان",
 		"بازاریابی",
+		"مجوز",
+		"اتحادیه",
+		"اصناف",
+		"لایحه",
+		"قانون",
+		"نوآورانه",
+		"معاونت علمی",
+		"مراکز رشد فناوری",
+		"پارک علمی",
+		"تجاری سازی",
+		"نرم افزار",
+		"برنامه",
+		"اپلیکیشن",
+		"توسعه",
+		"توسعه دهندگان",
+		"هوش مصنوعی",
+		"زیر ساخت",
+		"فناوری",
+		"تکنولوژی",
+		"رمزارز",
 	}
 	for _, key := range keys {
 		go scraping.ScrapingHandler(key, "zoomit")
@@ -31,6 +53,6 @@ func trainTask() {
 		go scraping.ScrapingHandler(key, "irna")
 		go scraping.ScrapingHandler(key, "tabnak")
 		go scraping.ScrapingHandler(key, "fars")
-		time.Sleep(10 * time.Second)
+		time.Sleep(30 * time.Second)
 	}
 }
