@@ -10,8 +10,9 @@
             "request": "launch",
             "mode": "debug",
             "env": {
-                "PORT": 3000
+                "PORT": 3003
             },
+            "envFile": "${workspaceFolder}/.development.env",
             "program": "${workspaceFolder}"
         },
         {
