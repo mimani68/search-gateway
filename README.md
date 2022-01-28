@@ -13,8 +13,9 @@ PORT=3000 go run main.go
 ## Usage
 
 ```bash
-curl -s http://me:3000/ping
-curl -s http://me:3000/q/فروش
+http :3000/ping
+http :3000/product/metadata
+http post :3000/search query=ترک
 ```
 
 ## Search types

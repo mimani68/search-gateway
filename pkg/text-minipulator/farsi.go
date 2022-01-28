@@ -14,6 +14,9 @@ func CleanFarsiText(text string) string {
 	removeNumberTagsPattern, _ := regexp.Compile("(?mi).\\s{1,}[۰۱۲۳۴۵۶۷۸۹]")
 	result = removeNumberTagsPattern.ReplaceAllString(result, "")
 
+	removeInvalidCharsPattern, _ := regexp.Compile("(?mi)(&#13;)")
+	result = removeInvalidCharsPattern.ReplaceAllString(result, "")
+
 	removeDoubleSpacePattern, _ := regexp.Compile("(?mi)\\s{2,}")
 	result = removeDoubleSpacePattern.ReplaceAllString(result, " ")
 

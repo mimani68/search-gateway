@@ -15,6 +15,7 @@ func trainTask() {
 		"بازار",
 		"بازده",
 		"سرمایه گذاری",
+		"سرمایه گذاری خطر پذیر",
 		"استارتاپ",
 		"نوآوری",
 		"دانش بنیان",
@@ -45,6 +46,7 @@ func trainTask() {
 		"فناوری",
 		"تکنولوژی",
 		"رمزارز",
+		"ارز",
 	}
 	for _, key := range keys {
 		go scraping.ScrapingHandler(key, "zoomit")
