@@ -10,17 +10,13 @@ import (
 func ProductMetadataHandler(c *gin.Context) {
 	category := []dto.ProductCategory{
 		{
-			Id:    "126510",
-			Title: "لوازم خانگی",
+			Id:         "126510",
+			Title:      "Home services",
+			TitleFarsi: "لوازم خانگی",
 		},
 	}
-	metrcs := dto.Metrics{
-		MarketCap:         "10000000",
-		InterestForInvest: "0.2",
-	}
-	result := dto.ProductResponse{
+	result := dto.ProductMetadataResponse{
 		Category: category,
-		Metrics:  metrcs,
 	}
 	c.JSON(http.StatusOK, result)
 }
