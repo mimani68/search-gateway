@@ -14,7 +14,7 @@ func CleanFarsiText(text string) string {
 	removeNumberTagsPattern, _ := regexp.Compile("(?mi).\\s{1,}[۰۱۲۳۴۵۶۷۸۹]")
 	result = removeNumberTagsPattern.ReplaceAllString(result, "")
 
-	removeInvalidCharsPattern, _ := regexp.Compile("(?mi)(&#13;)")
+	removeInvalidCharsPattern, _ := regexp.Compile("(?mi)(&#13;|&amp;|u200c)")
 	result = removeInvalidCharsPattern.ReplaceAllString(result, "")
 
 	removeDoubleSpacePattern, _ := regexp.Compile("(?mi)\\s{2,}")
@@ -24,7 +24,7 @@ func CleanFarsiText(text string) string {
 }
 
 func ExtractSentences(text string) [][]string {
-	onlyValidString, _ := regexp.Compile("[a-zA-Zضصثقفغعهخحجچشسیبلاتنمکگظطزرذدپو].*?(\\.\\s|\\?\\s|\\!\\s|؟\\s|؛\\s)")
+	onlyValidString, _ := regexp.Compile("[a-zA-Zضصثقفغعهخحجچشسیبلاتنمکگظطزژرذدپو].*?(\\.\\s|\\?\\s|\\!\\s|؟\\s|؛\\s)")
 	list := onlyValidString.FindAllStringSubmatch(text, -1)
 	return list
 }

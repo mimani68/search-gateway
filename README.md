@@ -30,3 +30,20 @@ http post :3000/search query=ترک
 * چه کسانی می توانند مشتریان بعدی باشند
 * برای توسعه فروش محصول چه کنیم
 * قیمت محصول چقدر است
+
+
+## Sample dataset
+
+```bash
+http ':3001/?q=برنامه&source=zoomit&itemNumber=20'
+http ':3001/?q=فناوری&source=zoomit&itemNumber=20'
+http ':3001/?q=فناوری&source=farsnews&itemNumber=20'
+http ':3001/?q=استارتاپ&source=tabnak&itemNumber=20'
+http ':3001/?q=برنامه&source=tabnak&itemNumber=20'
+http ':3001/?q=قیمت&source=tabnak&itemNumber=20'
+http ':3001/?q=اقتصادی&source=tabnak&itemNumber=20'
+http ':3001/?q=استارتاپ&source=iribnews&itemNumber=20'
+http ':3001/?q=استارتاپ&source=irna&itemNumber=20'
+http ':3001/?q=استارتاپ&source=fars&itemNumber=50'
+
+```

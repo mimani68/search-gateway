@@ -17,14 +17,15 @@ type SearchMeta struct {
 }
 
 type ResponseDto struct {
-	Meta                  SearchMeta `json:"meta,omitempty"`
-	KeyPartners           []Item     `json:"keyPartners,omitempty"`
-	KeyActivities         []Item     `json:"keyActivities,omitempty"`
-	KeyResources          []Item     `json:"keyResources,omitempty"`
-	ValuePropositions     []Item     `json:"valuePropositions,omitempty"`
-	CustomerRelationships []Item     `json:"customerRelationships,omitempty"`
-	Channels              []Item     `json:"channel,omitempty"`
-	CustomerSegments      []Item     `json:"customerSegments,omitempty"`
-	CostStructure         []Item     `json:"costStructure,omitempty"`
-	RevenueStreams        []Item     `json:"revenueStreams,omitempty"`
+	Meta                  SearchMeta      `json:"meta,omitempty"`
+	KeyPartners           []Item          `json:"keyPartners,omitempty"`
+	KeyActivities         []Item          `json:"keyActivities,omitempty"`
+	KeyResources          []Item          `json:"keyResources,omitempty"`
+	ValuePropositions     []Item          `json:"valuePropositions,omitempty"`
+	CustomerRelationships []Item          `json:"customerRelationships,omitempty"`
+	Channels              []Item          `json:"channel,omitempty"`
+	CustomerSegments      []Item          `json:"customerSegments,omitempty"`
+	CostStructure         []Item          `json:"costStructure,omitempty"`
+	RevenueStreams        []Item          `json:"revenueStreams,omitempty"`
+	Product               ProductResponse `json:"product,omitempty"`
 }

@@ -10,14 +10,14 @@ func FindCustomerSegments(query string) (bool, []dto.Item) {
 	var response []dto.Item
 	list := []dto.Article{}
 	// query = "suffix " + query + " suffix"
-	dbQueryState := db.Db.Where("body LIKE ?", "%"+query+"%").Find(&list)
+	dbQueryState := db.Db.Where("body LIKE ?", "% "+query+" %").Find(&list)
 	if dbQueryState.Error != nil {
 		panic("Error in retrive data")
 	}
 	for _, value := range list {
 		a := textminipulator.ShowText(value.Body, query)
 		if a["success"] != "true" {
-			return false, []dto.Item{}
+			continue
 		}
 		response = append(response, dto.Item{
 			Id:           value.Id,
